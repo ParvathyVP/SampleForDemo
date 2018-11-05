@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>File System</title>
+
+  <style type="text/css">
+    #contact-list {
+      height: 150px;
+      overflow-y: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="row printViewHide" *ngIf="availableItems" >
+    <div class="col-sm-4">Model</div>
+    <div class="col-sm-4"> <select [(ngModel)]="itemModel" class="browser-default custom-select">
+        <option  *ngFor="let avail of availableItems" selected="avail.model==itemModel">{{avail.model}}</option>
+      </select></div>
+    <div class="col-sm-2">
+      <input id="user_lic" [(ngModel)]="count" type="number" min="1" max="30" step="1" value="1" />
+    </div>
+    <div class="col-sm-2">
+      <button class="btn btn-primary" (click)="addItems();">Add Item</button>
+
+    </div>
+  </div>
+  <div class="container">
+    <!-- <h1>Enter Names and Email addresses of your contacts</h1>
+         <div class = "form-group">
+            <label for = "Name">Name</label>
+            <input type = "text" name = "Name" value = "" id = "Name" 
+               placeholder = "Name" class = "form-control" required>
+         </div>
+         
+         <div class = "form-group">
+            <label for = "Email">Email</label>
+            <input type = "email" name = "Email" value = "" id = "Email" 
+               placeholder = "Email" class = "form-control" required>
+         </div>
+         
+         <div class = "form-group">
+            <button class = "btn btn-primary" id = "add-to-list" (click)="addItems();">Add to list!</button>
+         </div> -->
+
+    <div id="container" *ngIf="selectedItems">
+      <table class="table table-condensed" *ngIf="selectedItems">
+        <tr>
+          <th class="col-xs-2">SL No.</th>
+          <th class="col-xs-4">Particulars</th>
+          <th class="col-xs-6">HSN/SAC</th>
+          <th class="col-xs-6">Qty</th>
+          <th class="col-xs-6">Unit</th>
+          <th class="col-xs-6">Rate</th>
+          <th class="col-xs-6">Amount</th>
+          <th class="col-xs-6">CGST</th>
+        </tr>
+        <tr  *ngFor="let sel of selectedItems; index as i" >
+        <td>{{i+1}}</td>
+        <td>{{sel.name}}</td>
+        <td>{{sel.model}}</td>
+        <td>{{sel.price}}</td>
+        <td>{{sel.qty}}</td>
+        <td>{{sel.amount}}</td>
+        <td>{{gst+"%"}}</td>
+      </tr>
+      <tr>
+        <td>Final Amount </td>
+        <td> </td>
+        <td> </td>
+        <td> </td>
+        <td> </td>
+        <td> </td>
+        <td>{{finalAmountGst}} </td>
+       </tr>
+      </table>
+    </div>
+  </div>
+</body>
+
+</html>
